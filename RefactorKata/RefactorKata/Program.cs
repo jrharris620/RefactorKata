@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
 
 namespace RefactorKata
 {
     internal class Program
     {
         private static void Main(string[] args)
+        {
+            var products = GetProducts();
+
+            foreach (var product in products)
+            {
+                Console.WriteLine(product.Name);
+            }
+
+        }
+
+        private static IEnumerable<Product> GetProducts()
         {
             using (var conn = new SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;"))
             {
@@ -26,16 +38,10 @@ namespace RefactorKata
                     products.Add(prod);
                 }
 
-                foreach (var product in products)
-                {
-                    Console.WriteLine(product.Name);
-                }
-
                 Console.WriteLine("Products Loaded!");
-                
+                return products;
+
             }
         }
-            
-            
     }
 }
