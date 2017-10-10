@@ -8,32 +8,34 @@ namespace RefactorKata
     {
         private static void Main(string[] args)
         {
-            var conn = new SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;");
-
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = "select * from Products";
-            /*
-             * cmd.CommandText = "Select * from Invoices";
-             */
-            var reader = cmd.ExecuteReader();
-            var products = new List<Product>();
-            
-            //Have not yet learned about Dapper @jrharris620
-            //TODO: Replace with Dapper
-            while (reader.Read())
+            using (var conn = new SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;"))
             {
-                var prod = new Product {Name = reader["Name"].ToString()};
-                products.Add(prod);
-            }
-            
-            foreach (var product in products)
-            {
-                Console.WriteLine(product.Name);
-            }
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "select * from Products";
+                /*
+                 * cmd.CommandText = "Select * from Invoices";
+                 */
+                var reader = cmd.ExecuteReader();
+                var products = new List<Product>();
 
-            Console.WriteLine("Products Loaded!");
+                //Have not yet learned about Dapper @jrharris620
+                //TODO: Replace with Dapper
+                while (reader.Read())
+                {
+                    var prod = new Product { Name = reader["Name"].ToString() };
+                    products.Add(prod);
+                }
 
-            conn.Dispose();
+                foreach (var product in products)
+                {
+                    Console.WriteLine(product.Name);
+                }
+
+                Console.WriteLine("Products Loaded!");
+                
+            }
         }
+            
+            
     }
 }
