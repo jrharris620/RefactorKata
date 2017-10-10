@@ -18,6 +18,10 @@ namespace RefactorKata
 
         }
 
+        /// <summary>
+        /// The purpose of this new Method is so that we can reference GetProducts in the future.
+        /// </summary>
+        /// <returns></returns>
         private static IEnumerable<Product> GetProducts()
         {
             using (var conn = new SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;"))
