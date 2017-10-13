@@ -19,7 +19,7 @@ namespace RefactorKata
         }
 
         /// <summary>
-        /// The purpose of this new Method is so that we can reference GetProducts in the future.
+        /// Fetch all products from the database.
         /// </summary>
         /// <returns></returns>
         private static IEnumerable<Product> GetProducts()
